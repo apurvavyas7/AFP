@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>DCS, Ganpat University</h1>
-        <h2>Courses</h2>
-    </body>
-</html>
+{% extends './myTheme.html' %}
+{% block content %}
+
+<!-- Course Data Table -->
+<table class="table table-striped table-hover mt-4 align-middle">
+    <thead>
+        <tr>
+            <th scope="col">Course ID</th>
+            <th scope="col">Name of Course</th>
+            <th scope="col">Total Semester</th>
+            <th scope="col">List of Subjects</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in courses %}
+        <tr>
+            <th scope="row">{{ course["id"] }}</th>
+            <td>{{ course["course"] }}</td>
+            <td>{{ course["semester"] }}</td>
+            <td>
+                <!-- Displays subjects as horizontal badges -->
+                <div class="d-flex flex-wrap gap-1">
+                    {% for subject in course["subjects"].split(',') %}
+                        <span class="badge bg-secondary">{{ subject }}</span>
+                    {% endfor %}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Common Buttons Section (Placed horizontally at the bottom) -->
+<div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mt-4 mb-4">
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-success">Success</button>
+    <button type="button" class="btn btn-danger">Danger</button>
+    <button type="button" class="btn btn-warning text-dark">Warning</button>
+    <button type="button" class="btn btn-info text-white">Info</button>
+    <button type="button" class="btn btn-light border">Light</button>
+    <button type="button" class="btn btn-dark">Dark</button>
+    <a href="#" class="btn btn-link">Link</a>
+</div>
+
+{% endblock content %}
